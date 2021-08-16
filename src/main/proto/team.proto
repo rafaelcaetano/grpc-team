@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.pdz.team.dto";
+option java_outer_classname = "teamProto";
+option objc_class_prefix = "RTG";
+
+
+package dto;
+
+service TeamService {
+    rpc SayHello (Member) returns (MessageResponse){}
+    rpc GetTeamByPerson (Person) returns (Team){}
+    rpc GetMembersByPosition (Position) returns (stream Member){}
+    rpc EstimatePositionsByPersons (stream Person) returns (EstimatePosition) {}
+}
+
+message Team {
+    int32 id = 1;
+    string name = 2;
+    repeated Member member = 3;
+}
+
+message FeatureDatabase {
+    repeated Team team = 1;
+}
+
+message Member {
+    int32 id = 1;
+    Person person = 2;
+    Position position = 3;
+}
+
+message Position {
+    int32 id = 1;
+    string name = 2;
+}
+
+message Person {
+    int32 id = 1;
+    string name = 2;
+}
+
+message MessageResponse {
+    string message = 1;
+}
+message EstimatePosition {
+    int32 qaCounter = 1;
+    int32 sreCounter = 2;
+    int32 devCounter = 3;
+    int32 tlCounter = 4;
+}

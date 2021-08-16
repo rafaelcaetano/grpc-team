@@ -1,0 +1,137 @@
+{
+    "team": [
+        {
+            "id": 1,
+            "name": "Convivência",
+            "member": [
+                {
+                    "id": 1,
+                    "person": {
+                        "id": 1,
+                        "name": "Rafa"
+                    },
+                    "position": {
+                        "id": 1,
+                        "name": "desenvolvedor"
+                    }
+                },
+                {
+                    "id": 2,
+                    "person": {
+                        "id": 2,
+                        "name": "Botinha"
+                    },
+                    "position": {
+                        "id": 1,
+                        "name": "desenvolvedor"
+                    }
+                },
+                {
+                    "id": 3,
+                    "person": {
+                        "id": 3,
+                        "name": "Vine"
+                    },
+                    "position": {
+                        "id": 1,
+                        "name": "desenvolvedor"
+                    }
+                },
+                {
+                    "id": 4,
+                    "person": {
+                        "id": 4,
+                        "name": "Vertão"
+                    },
+                    "position": {
+                        "id": 1,
+                        "name": "desenvolvedor"
+                    }
+                },
+                {
+                    "id": 5,
+                    "person": {
+                        "id": 5,
+                        "name": "Carlão"
+                    },
+                    "position": {
+                        "id": 1,
+                        "name": "desenvolvedor"
+                    }
+                },
+                {
+                    "id": 6,
+                    "person": {
+                        "id": 6,
+                        "name": "Luanzito"
+                    },
+                    "position": {
+                        "id": 1,
+                        "name": "desenvolvedor"
+                    }
+                },
+                {
+                    "id": 7,
+                    "person": {
+                        "id": 7,
+                        "name": "Flavão"
+                    },
+                    "position": {
+                        "id": 5,
+                        "name": "qa"
+                    }
+                },
+                {
+                    "id": 8,
+                    "person": {
+                        "id": 8,
+                        "name": "Cesão"
+                    },
+                    "position": {
+                        "id": 2,
+                        "name": "tech lead zup"
+                    }
+                },
+                {
+                    "id": 9,
+                    "person": {
+                        "id": 9,
+                        "name": "Rubão"
+                    },
+                    "position": {
+                        "id": 3,
+                        "name": "tech lead itau"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Cross",
+            "member": [
+                {
+                    "id": 1,
+                    "person": {
+                        "id": 10,
+                        "name": "Gersão"
+                    },
+                    "position": {
+                        "id": 4,
+                        "name": "sre"
+                    }
+                },
+                {
+                    "id": 2,
+                    "person": {
+                        "id": 11,
+                        "name": "Tatá"
+                    },
+                    "position": {
+                        "id": 4,
+                        "name": "sre"
+                    }
+                }
+            ]
+        }
+    ]
+}
