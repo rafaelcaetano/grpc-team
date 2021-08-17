@@ -13,6 +13,7 @@ service TeamService {
     rpc GetTeamByPerson (Person) returns (Team){}
     rpc GetMembersByPosition (Position) returns (stream Member){}
     rpc EstimatePositionsByPersons (stream Person) returns (EstimatePosition) {}
+    rpc GetPersonByTeam (stream Team) returns (stream Person) {}
 }
 
 message Team {

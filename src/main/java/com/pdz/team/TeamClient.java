@@ -112,6 +112,50 @@ public class TeamClient {
         }
     }
 
+    public CountDownLatch getPersonByTeam() {
+        info("\n\n Getting persons by team request.");
+        final CountDownLatch finishLatch = new CountDownLatch(1);
+
+        StreamObserver<Person> responseObserver = new StreamObserver<Person>() {
+            @Override
+            public void onNext(Person person) {
+                info("The person: " + person);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                warning("GetPersonByTeam Failed: {0}", Status.fromThrowable(throwable));
+                finishLatch.countDown();
+            }
+
+            @Override
+            public void onCompleted() {
+                info("Fnished getPersonByTeam");
+                finishLatch.countDown();
+            }
+        };
+
+        StreamObserver<Team> requestObserver = asyStub.getPersonByTeam(responseObserver);
+
+        try {
+            Team convivenciaTeam = Team.newBuilder().setId(1).build();
+            Team crossTeam = Team.newBuilder().setId(2).build();
+
+           Team[] requests = {convivenciaTeam, crossTeam};
+           for (Team request : requests) {
+               info("Sending a request:" + request);
+               requestObserver.onNext(request);
+           }
+        } catch (RuntimeException ex) {
+            requestObserver.onError(ex);
+            throw ex;
+        }
+
+        requestObserver.onCompleted();
+
+        return finishLatch;
+    }
+
     public static void main(String[] args) throws InterruptedException {
         String target = "localhost:8980";
         if (args.length > 0) {
@@ -139,6 +183,13 @@ public class TeamClient {
 
             // - Client-side streaming RPC
             client.estimatePositionsByPersons(getPersonsToEstimatePosition());
+
+            // - Bidirectional stream RPC
+            CountDownLatch finiLatch = client.getPersonByTeam();
+
+            if(!finiLatch.await(1, TimeUnit.MINUTES)) {
+                client.warning("GetPersonByTeam can not finish within 1 minutes.");
+            }
 
         } finally {
             channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);

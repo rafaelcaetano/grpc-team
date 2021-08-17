@@ -7,7 +7,9 @@ import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -137,6 +139,29 @@ public class TeamServer {
             };
         }
 
+        @Override
+        public StreamObserver<Team> getPersonByTeam(final StreamObserver<Person> responseObserver) {
+            return new StreamObserver<Team>() {
+                @Override
+                public void onNext(Team team) {
+                    List<Person> personList = getPositionByTeam(team);
+                    for(Person person : personList) {
+                        responseObserver.onNext(person);
+                    }
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+                    logger.log(Level.WARNING, "getPersonTeam cancelled");
+                }
+
+                @Override
+                public void onCompleted() {
+                    responseObserver.onCompleted();
+                }
+            };
+        }
+
         private Team matchTeamByPerson(Person person) {
             for (Team team : teams) {
                 for (Member member : team.getMemberList()) {
@@ -157,6 +182,18 @@ public class TeamServer {
                 }
             }
             return null;
+        }
+
+        private List<Person> getPositionByTeam(Team teamRequest) {
+            List<Person> positionList = new ArrayList<>();
+            for (Team team : teams) {
+                if(teamRequest.getId() == team.getId()) {
+                    for (Member member : team.getMemberList()) {
+                        positionList.add(member.getPerson());
+                    }
+                }
+            }
+            return positionList;
         }
     }
 }
